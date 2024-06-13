@@ -42,3 +42,23 @@ module "project-services" {
 resource "random_id" "id" {
   byte_length = 4
 }
+
+
+data "template_file" "index_html" {
+  template = "src/frontend_service/templates/index.html"
+}
+
+resource "google_storage_bucket_object" "index_html" {
+  name   = "index.html"
+  bucket = "cloud-ai-platform-c152daa7-9f03-4a64-9c4a-6791263c3d53"
+  source = data.template_file.index_html.rendered
+}
+
+
+
+
+resource "google_storage_bucket_iam_member" "all_users_read" {
+  bucket = "cloud-ai-platform-c152daa7-9f03-4a64-9c4a-6791263c3d53"  # Use the existing bucket name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
+}
