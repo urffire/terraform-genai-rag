@@ -17,8 +17,8 @@
 module "simple_example" {
   source = "../.."
 
-  project_id = var.project_id
-  # region              = "asia-southeast1"
+  project_id = "organic-phoenix-424613-s0"
+  region              = "europe-west1"
   # deletion_protection = false
   # force_destroy       = true
 }
